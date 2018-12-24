@@ -7,9 +7,9 @@ index 289836067..86365d5bd 100644
          platform = x64
      else ifneq (,$(findstring aarch64,$(ARCH)))
 +        RK_BOARD = $(shell cat /sys/firmware/devicetree/base/model | cut -f2 -d" ")
-+	       ifneq (,$(grep RockPro64,$(RK_BOARD)))
++	       ifneq (,$(findstring RockPro64,$(RK_BOARD)))
 +	           platform = rockpro64
-+	       else ifneq (,$(grep Rock64,$(RK_BOARD)))
++	       else ifneq (,$(findstring Rock64,$(RK_BOARD)))
 +	           platform = rock64
 +	       endif
          HARDWARE = $(shell grep Hardware /proc/cpuinfo)
