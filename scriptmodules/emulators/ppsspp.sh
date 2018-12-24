@@ -70,7 +70,7 @@ function build_ffmpeg_ppsspp() {
     elif isPlatform "aarch64"; then
         arch="arm64"
     fi
-    isPlatform "vero4k" && local extra_params='--arch=arm'
+    isPlatform "vero4k" || isPlatform "rockpro64" ||isPlatform "rock64" && local extra_params='--arch=arm'
 
     local MODULES
     local VIDEO_DECODERS
