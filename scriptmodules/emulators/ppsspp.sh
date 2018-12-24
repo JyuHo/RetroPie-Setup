@@ -32,7 +32,7 @@ function sources_ppsspp() {
     cd ppsspp
 
     if isPlatform "tinker" || isPlatform "rock64" || isPlatform "rockpro64"; then
-        applyPatch "$md_data/02_tinker_options.diff"
+        applyPatch "$md_data/02_kms_boards_options.diff"
     elif ! isPlatform "vero4k"; then
         applyPatch "$md_data/01_egl_name.diff"
     fi
