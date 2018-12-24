@@ -9,7 +9,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ARCH_FLAGS}"  CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ARCH_FLAGS}" CACHE STRING "" FORCE)
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${ARCH_FLAGS}" CACHE STRING "" FORCE)
 
-# make a link cd /usr/lib/arm-linux-gnueabihf && ln -s libGLESv2.so.2 libGLESv2.so
+# If error "usr/bin/ld:cannot find -lGLESv2" make a link cd /usr/lib/arm-linux-gnueabihf && ln -s libGLESv2.so.2 libGLESv2.so
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib/arm-linux-gnueabihf" CACHE STRING "" FORCE)
 
 set(OPENGL_LIBRARIES /usr/lib/arm-linux-gnueabihf/libGLESv2.so)
