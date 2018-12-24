@@ -24,16 +24,14 @@ function depends_ppsspp() {
 }
 
 function sources_ppsspp() {
-    if isPlatform "tinker"; then
-        gitPullOrClone "$md_build/ppsspp" https://github.com/hrydgard/ppsspp.git
-    elif isPlatform "vero4k"; then
+    if isPlatform "tinker" | isPlatform "vero4k" | isPlatform "rock64" | isPlatform "rockpro64"; then
         gitPullOrClone "$md_build/ppsspp" https://github.com/hrydgard/ppsspp.git
     else
         gitPullOrClone "$md_build/ppsspp" https://github.com/hrydgard/ppsspp.git v1.5.4
     fi
     cd ppsspp
 
-    if isPlatform "tinker"; then
+    if isPlatform "tinker" | isPlatform "rock64" | isPlatform "rockpro64"; then
         applyPatch "$md_data/02_tinker_options.diff"
     elif ! isPlatform "vero4k"; then
         applyPatch "$md_data/01_egl_name.diff"
@@ -138,6 +136,8 @@ function build_ppsspp() {
         params+=(-DUSING_GLES2=ON -DUSING_FBDEV=ON)
     elif isPlatform "tinker"; then
         params+=(-DCMAKE_TOOLCHAIN_FILE="$md_data/tinker.armv7.cmake")
+    elif isPlatform "rock64" | isPlatform "rockpro64"; then
+        params+=(-DCMAKE_TOOLCHAIN_FILE="$md_data/rock64_pro64.armv8.cmake")
     elif isPlatform "vero4k"; then
         params+=(-DCMAKE_TOOLCHAIN_FILE="cmake/Toolchains/vero4k.armv8.cmake")
     fi
@@ -162,7 +162,7 @@ function configure_ppsspp() {
     mkUserDir "$md_conf_root/psp/PSP"
     ln -snf "$romdir/psp" "$md_conf_root/psp/PSP/GAME"
 
-    if isPlatform "tinker"; then
+    if isPlatform "tinker" | isPlatform "rock64" | isPlatform "rockpro64"; then
         addEmulator 1 "$md_id" "psp" "$md_inst/PPSSPPSDL --fullscreen %ROM%"
     else
         addEmulator 0 "$md_id" "psp" "$md_inst/PPSSPPSDL %ROM%"
