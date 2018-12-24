@@ -26,12 +26,12 @@ function depends_reicast() {
 function sources_reicast() {
     if isPlatform "x11"; then
         gitPullOrClone "$md_build" https://github.com/reicast/reicast-emulator.git
-    elif isPlatform "vero4k" | isPlatform "tinker" |isPlatform "rock64" | isPlatform "rockpro64"; then
+    elif isPlatform "vero4k" || isPlatform "tinker" ||isPlatform "rock64" || isPlatform "rockpro64"; then
         gitPullOrClone "$md_build" https://github.com/reicast/reicast-emulator.git
     else
         gitPullOrClone "$md_build" https://github.com/RetroPie/reicast-emulator.git retropie
     fi
-    if isPlatform "rock64" | isPlatform "rockpro64"; then
+    if isPlatform "rock64" || isPlatform "rockpro64"; then
         sed -i "s/CXXFLAGS += -fno-rtti -fpermissive -fno-operator-names/CXXFLAGS += -fno-rtti -fpermissive -fno-operator-names -D_GLIBCXX_USE_CXX11_ABI=0/g" shell/linux/Makefile
         applyPatch "$md_data/01_add_rock64_pro64.diff"
     else
@@ -44,7 +44,7 @@ function build_reicast() {
     if isPlatform "rpi"; then
         make platform=rpi2 clean
         make platform=rpi2
-    elif isPlatform "tinker" | isPlatform "rock64" | isPlatform "rockpro64"; then
+    elif isPlatform "tinker" || isPlatform "rock64" || isPlatform "rockpro64"; then
         make USE_GLES=1 USE_SDL=1 clean
         make USE_GLES=1 USE_SDL=1
     else
@@ -58,7 +58,7 @@ function install_reicast() {
     cd shell/linux
     if isPlatform "rpi"; then
         make platform=rpi2 PREFIX="$md_inst" install
-    elif isPlatform "tinker" | isPlatform "rock64" | isPlatform "rockpro64"; then
+    elif isPlatform "tinker" || isPlatform "rock64" || isPlatform "rockpro64"; then
         make USE_GLES=1 USE_SDL=1 PREFIX="$md_inst" install
     else
         make PREFIX="$md_inst" install
