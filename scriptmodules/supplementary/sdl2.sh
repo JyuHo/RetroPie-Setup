@@ -16,7 +16,11 @@ rp_module_section=""
 rp_module_flags=""
 
 function get_ver_sdl2() {
-    echo "2.0.8"
+    if isPlatform "kms";then
+        echo "2.0.9"
+    else
+        echo "2.0.8"
+    fi
 }
 
 function get_pkg_ver_sdl2() {
@@ -53,7 +57,13 @@ function sources_sdl2() {
     isPlatform "kms" && branch="kms-$ver"
     isPlatform "vero4k" && branch="mali-$ver"
 
-    gitPullOrClone "$md_build/$pkg_ver" https://github.com/RetroPie/SDL-mirror.git "$branch"
+
+    if isPlatform "kms";then
+        gitPullOrClone "$md_build/$pkg_ver" https://github.com/JyuHo/SDL-mirror.git "$branch"
+    else
+        gitPullOrClone "$md_build/$pkg_ver" https://github.com/RetroPie/SDL-mirror.git "$branch"
+    fi
+    
     cd "$pkg_ver"
     DEBEMAIL="Jools Wills <buzz@exotica.org.uk>" dch -v "$pkg_ver" "SDL $ver configured for the $__platform"
 }
