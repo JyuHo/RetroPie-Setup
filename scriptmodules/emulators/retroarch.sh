@@ -201,7 +201,7 @@ function configure_retroarch() {
     iniSet "all_users_control_menu" "true"
 
     # rgui by default
-    iniSet "menu_driver" "rgui"
+    iniSet "menu_driver" "xml"
 
     # hide online updater menu options
     iniSet "menu_show_core_updater" "false"
@@ -225,7 +225,7 @@ function configure_retroarch() {
     # if no menu_driver is set, force RGUI, as the default has now changed to XMB.
     iniConfig " = " '"' "$configdir/all/retroarch.cfg"
     iniGet "menu_driver"
-    [[ -z "$ini_value" ]] && iniSet "menu_driver" "rgui"
+    [[ -z "$ini_value" ]] && iniSet "menu_driver" "xml"
 
     # if no menu_unified_controls is set, force it on so that keyboard player 1 can control
     # the RGUI menu which is important for arcade sticks etc that map to keyboard inputs
