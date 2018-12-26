@@ -392,7 +392,7 @@ function platform_vero4k() {
 }
 
 function platform_rock64() {
-    __default_cflags="I/usr/include -L/usr/lib/arm-linux-gnueabihf -O2 -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8"
+    __default_cflags="-O2 -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8"
     __default_cflags+=" -ftree-vectorize -funsafe-math-optimizations"
     # required for mali headers to define GL functions
     __default_cflags+=" -DGL_GLEXT_PROTOTYPES"
@@ -401,7 +401,7 @@ function platform_rock64() {
     __platform_flags="arm armv8 neon kms gles"
 }
 function platform_rockpro64() {
-    __default_cflags="I/usr/include -L/usr/lib/arm-linux-gnueabihf -O2 -march=armv8-a+crc -mtune=cortex-a72.cortex-a53 -mfpu=neon-fp-armv8"
+    __default_cflags="-O2 -march=armv8-a+crc -mtune=cortex-a72.cortex-a53 -mfpu=neon-fp-armv8"
     __default_cflags+=" -ftree-vectorize -funsafe-math-optimizations"
     # required for mali headers to define GL functions
     __default_cflags+=" -DGL_GLEXT_PROTOTYPES"
