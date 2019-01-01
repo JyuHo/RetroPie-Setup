@@ -76,6 +76,11 @@ function build_sdl2() {
         sed -i '/^\s*lib.*x\|mesa/ d' ./debian/control
         # disable vulkan and X11 video support
         sed -i 's/confflags =/confflags = --disable-video-vulkan --disable-video-x11 \\\n/' ./debian/rules
+    elif isPlatform "rock64" || isPlatform "rockpro64"; then
+        # remove harmful (mesa) and un-needed (X11) dependancies from debian package control
+        sed -i '/^\s*lib.*x\|mesa/ d' ./debian/control
+        # disable vulkan and X11 video support
+        sed -i 's/confflags =/confflags = --disable-video-x11 \\\n/' ./debian/rules
     fi
 
     dpkg-buildpackage
